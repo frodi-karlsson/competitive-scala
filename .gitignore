@@ -55,3 +55,4 @@ About
 
 # AOC specific
 token
+src/main/scala/aoc/playground.scala
