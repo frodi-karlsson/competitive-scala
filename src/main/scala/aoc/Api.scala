@@ -2,7 +2,7 @@
 //> using lib "org.xerial:sqlite-jdbc:3.39.2.1"
 //> using lib "net.java.dev.jna:platform:3.5.2"
 //> using lib "org.typelevel::jawn-ast:1.3.2"
-package aoc
+package competitive.aoc
 
 import scala.io.Source
 import sttp.client3.*

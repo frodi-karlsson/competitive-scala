@@ -1,8 +1,8 @@
-package aoc
+package competitive.aoc
 @main
 def run =
     // change this to reflect year
-    import aoc.y2022.*
+    import  competitive.aoc.y2022.*
     val days = 
         Vector(
             One, Two, Three, Four, Five, 
@@ -29,7 +29,7 @@ def run =
 
 
 //@main // uncomment this to generate new year/days
-def generate =
+def generateAoc =
     //get year
     var inputValid = false
     var year = 0
@@ -91,10 +91,10 @@ def generate =
 
     def getCode(day: Int) = 
         val dayStr = dayToString(day)
-        s"""package aoc.y$year
-import aoc.Problem
+        s"""package competitive.aoc.y$year
+import competitive.aoc.AocProblem
 
-object $dayStr extends Problem($year, $day):
+object $dayStr extends AocProblem($year, $day):
     def parse(input: Vector[String]) = 
         ???
 

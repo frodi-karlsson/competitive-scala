@@ -1,4 +1,4 @@
-package aoc.algorithms.graphs
+package competitive.algorithms.graphs
 
 trait Node[N]:
     val id: N

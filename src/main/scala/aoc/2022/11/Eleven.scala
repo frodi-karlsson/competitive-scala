@@ -1,7 +1,7 @@
-package aoc.y2022
-import aoc.Problem
+package competitive.aoc.y2022
+import competitive.aoc.AocProblem
 
-object Eleven extends Problem(2022, 11):
+object Eleven extends AocProblem(2022, 11):
     def parse(input: Vector[String]) = 
         ???
 

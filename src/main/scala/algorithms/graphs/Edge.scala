@@ -1,4 +1,4 @@
-package aoc.algorithms.graphs
+package competitive.algorithms.graphs
 
 trait Edge[N]:
     val from: Node[N]

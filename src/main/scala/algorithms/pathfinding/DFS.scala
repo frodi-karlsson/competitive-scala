@@ -1,6 +1,6 @@
-package aoc.algorithms.pathfinding
+package competitive.algorithms.pathfinding
 
-import aoc.algorithms.graphs.*
+import competitive.algorithms.graphs.*
 import collection.mutable.{Set, Stack}
 
 class DFS[T] extends Pathfinder[T]:

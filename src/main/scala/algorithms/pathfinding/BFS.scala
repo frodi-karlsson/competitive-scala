@@ -1,6 +1,6 @@
-package aoc.algorithms.pathfinding
+package competitive.algorithms.pathfinding
 
-import aoc.algorithms.graphs.*
+import competitive.algorithms.graphs.*
 
 class BFS[T] extends Pathfinder[T]:
     def findPath(graph: Graph[T, UnweightedEdge[T]], start: Node[T], end: Node[T]): Option[Vector[Node[T]]] =
@@ -40,8 +40,7 @@ class BFS[T] extends Pathfinder[T]:
             else
                 curr.visited = true
                 var newResult = result
-                for edge <- graph.edgesFrom(curr) do
-                    if visitingLogic(curr, edge.to) then
+                for edge <- graph.edgesFrom(curr).filter(edge => visitingLogic(curr, edge.to)) do
                         newResult = recurse(edge.to, dest, path :+ edge.to, newResult)
                 onFinishPath(curr, dest)
                 newResult

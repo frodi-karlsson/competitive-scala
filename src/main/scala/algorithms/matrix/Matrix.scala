@@ -1,5 +1,5 @@
-package aoc.algorithms.matrix
-import aoc.algorithms.graphs.*
+package competitive.algorithms.matrix
+import competitive.algorithms.graphs.*
 
 enum ROT:
     case cw, ccw

@@ -1,7 +1,7 @@
-package aoc.y2022
-import aoc.Problem
+package competitive.aoc.y2022
+import competitive.aoc.AocProblem
 
-object Two extends Problem(2022, 2):
+object Two extends AocProblem(2022, 2):
     private def rps(opponent: String, player: String, oRPS: (String, String, String), pRPS: (String, String, String)) =
         val (oRock, oPaper, oScissors) = oRPS
         val (pRock, pPaper, pScissors) = pRPS

@@ -1,7 +1,7 @@
-package aoc
+package competitive.aoc
 import scala.io.Source
 
-trait Problem(year: Int, day: Int):
+trait AocProblem(year: Int, day: Int):
     private val basePath = "src/main/scala/aoc/"
     private val notImplemented = "Not implemented"
     def part1(input: Vector[String]): String = notImplemented

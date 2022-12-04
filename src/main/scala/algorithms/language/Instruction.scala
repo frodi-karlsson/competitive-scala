@@ -1,4 +1,4 @@
-package aoc.algorithms.language
+package competitive.algorithms.language
 
 trait Instruction[T](val name: String, val arity: Int)
 

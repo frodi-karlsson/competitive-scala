@@ -1,6 +1,6 @@
-import aoc.algorithms.graphs.*
-import aoc.algorithms.pathfinding.*
-import aoc.algorithms.matrix.*
+import competitive.algorithms.graphs.*
+import competitive.algorithms.pathfinding.*
+import competitive.algorithms.matrix.*
 
 //@main
 def test =

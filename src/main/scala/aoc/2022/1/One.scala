@@ -1,8 +1,8 @@
 //> using scala "3.2.0"
-package aoc.y2022
-import aoc.Problem
+package competitive.aoc.y2022
+import competitive.aoc.AocProblem
 
-object One extends Problem(2022, 1):
+object One extends AocProblem(2022, 1):
     def parse(input: Vector[String]) = 
         input
             .foldLeft(Vector(Vector[Int]()))((acc, line) =>

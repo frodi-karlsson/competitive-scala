@@ -1,4 +1,4 @@
-package aoc.algorithms.graphs
+package competitive.algorithms.graphs
 
 trait Graph[N, E <: Edge[N]]:
     val nodes: Vector[Node[N]]

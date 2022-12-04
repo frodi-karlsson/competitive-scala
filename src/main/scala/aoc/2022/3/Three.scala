@@ -1,7 +1,7 @@
-package aoc.y2022
-import aoc.Problem
+package competitive.aoc.y2022
+import competitive.aoc.AocProblem
 
-object Three extends Problem(2022, 3):
+object Three extends AocProblem(2022, 3):
     val alphabetMap = ('a' to 'z').zipWithIndex.map(p => (p._1, p._2 + 1)).toMap ++ 
         ('A' to 'Z').zipWithIndex.map(i => (i._1, i._2 + 27)).toMap
 
