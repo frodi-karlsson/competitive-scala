@@ -60,7 +60,8 @@ object Five extends AocProblem(2022, 5):
                         matrix = matrix.withRow(0, matrix.row(0).map(b => Box(' ', true)))
                 for i <- 0 until boxesToTake.length do
                     matrix = matrix.swapped(
-                        (matrix.col(args(2) - 1).zipWithIndex.reverse.find(_._1.empty).get._2 - boxesToTake.length + i + 1, args(2) - 1),
+                        (matrix.col(args(2) - 1)
+                            .zipWithIndex.reverse.find(_._1.empty).get._2 - boxesToTake.length + i + 1, args(2) - 1),
                         (matrix.col(args(1) - 1).indexWhere(!_.empty), args(1) - 1)
                     )
         execute(execution, instructions)
