@@ -1,4 +1,3 @@
-//> using lib "com.softwaremill.sttp.client3::core:3.8.3"
 package competitive.util
 
 import scala.io.Source

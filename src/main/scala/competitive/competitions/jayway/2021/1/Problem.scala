@@ -32,7 +32,7 @@ object One extends JaywayProblem[Place]("https://knattra.jayway.com/hauntingLoca
             println(s"start: $start, end: $end, path: $path")
             path
         ).flatten.maxBy(pathFunc)
-        round(pathFunc(best)) + " " + best.map(_.id._1.name).mkString(" -> ")
+        s"${round(pathFunc(best))} ${best.map(_.id._1.name).mkString(" -> ")}"
         
             
 

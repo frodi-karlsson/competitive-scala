@@ -1,4 +1,3 @@
-//> using scala "3.2.0"
 package competitive.competitions.aoc.y2022
 import competitive.competitions.aoc.AocProblem
 

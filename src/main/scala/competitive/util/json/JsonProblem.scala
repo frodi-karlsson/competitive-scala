@@ -1,6 +1,3 @@
-//> using lib "io.circe::circe-core:0.14.1"
-//> using lib "io.circe::circe-generic:0.14.1"
-//> using lib "io.circe::circe-parser:0.14.1"
 package competitive.util.json
 import io.circe.*
 import competitive.util.json.{Json as JsonUtil}

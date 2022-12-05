@@ -204,7 +204,7 @@ case class Matrix[T](override protected val vector: Vector[Vector[T]] = Vector.e
         case FLIP.x => Matrix(vector.map(_.reverse))
         case FLIP.y => Matrix(vector.reverse)
     override def transpose: Matrix[T] = Matrix(vector.transpose)
-    override def zip[U](other: Matrix[U]): Matrix[(T, U)] = Matrix(vector.zip(other.vector).map(_.zipped.map((_, _))))
+    override def zip[U](other: Matrix[U]): Matrix[(T, U)] = Matrix(vector.zip(other.vector).map(v => v._1.zip(v._2)))
     override def +(other: Matrix[T], pos: POS = POS.bottom): Matrix[T] = pos match
         case POS.top => Matrix(other.vector ++ vector)
         case POS.bottom => Matrix(vector ++ other.vector)

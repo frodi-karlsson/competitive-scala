@@ -1,0 +1,5 @@
+//> using lib "com.softwaremill.sttp.client3::core:3.8.5"
+//> using scala "3.2.1"
+//> using lib "io.circe::circe-core:0.15.0-M1"
+//> using lib "io.circe::circe-generic:0.15.0-M1"
+//> using lib "io.circe::circe-parser:0.15.0-M1"
