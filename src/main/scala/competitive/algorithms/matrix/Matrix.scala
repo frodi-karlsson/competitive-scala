@@ -124,6 +124,14 @@ trait MatrixTrait[T]:
       */
     def withoutCol(col: Int): Matrix[T]
     /**
+      * Returns the matrix with values at the given positions swapped
+      *
+      * @param pos1 The first position
+      * @param pos2 The second position
+      * @return The matrix with values at the given positions swapped
+      */
+    def swapped(pos1: (Int, Int), pos2: (Int, Int)): Matrix[T]
+    /**
       * Returns a vector containing a range of rows
       * @param 
       * @param start The start of the range
@@ -202,14 +210,27 @@ case class Matrix[T](override protected val vector: Vector[Vector[T]] = Vector.e
         case POS.bottom => Matrix(vector ++ other.vector)
         case POS.left => Matrix(vector.zip(other.vector).map((row, otherRow) => otherRow ++ row))
         case POS.right => Matrix(vector.zip(other.vector).map((row, otherRow) => row ++ otherRow))
-    override def withRow(row: Int, values: Vector[T]): Matrix[T] = Matrix(vector.updated(row, values))
-    override def withCol(col: Int, values: Vector[T]): Matrix[T] = Matrix(vector.zip(values).map((row, value) => row.updated(col, value)))
+    // adds the row at the given index, prepending if index is 0 and appending if index is rows
+    override def withRow(row: Int, values: Vector[T]): Matrix[T] =
+        if row == 0 then Matrix(values +: vector)
+        else if row == rows then Matrix(vector :+ values)
+        else Matrix(vector.take(row) ++ Vector(values) ++ vector.drop(row))
+    override def withCol(col: Int, values: Vector[T]): Matrix[T] =
+        if col == 0 then Matrix(vector.map(c => values.head +: c).zip(values.tail).map((row, value) => value +: row))
+        else if col == cols then Matrix(vector.map(c => c :+ values.head).zip(values.tail).map((row, value) => row :+ value))
+        else Matrix(vector.zip(values).map((row, value) => row.take(col) ++ Vector(value) ++ row.drop(col)))
     override def withoutRow(row: Int): Matrix[T] = 
         if row < 0 || row >= rows then this
         else Matrix(vector.take(row) ++ vector.drop(row + 1))
     override def withoutCol(col: Int): Matrix[T] =
         if col < 0 || col >= cols then this
         else Matrix(vector.map(row => row.take(col) ++ row.drop(col + 1)))
+    override def swapped(pos1: (Int, Int), pos2: (Int, Int)): Matrix[T] = 
+        val (row1, col1) = pos1
+        val (row2, col2) = pos2
+        val value1 = apply(row1, col1)
+        val value2 = apply(row2, col2)
+        updated(row1, col1, value2).updated(row2, col2, value1)
     override def rowRange(start: Int, end: Int): Vector[Vector[T]] = vector.slice(start, end)
     override def colRange(start: Int, end: Int): Vector[Vector[T]] = vector.map(_.slice(start, end))
     private val nodes =
@@ -346,6 +367,9 @@ object Matrix:
     def testWithoutCol: Unit =
         val mat = Matrix(3, 3, (row, col) => row * col)
         assert(mat.withoutCol(0).cols == 2)
+    def testSwapped: Unit =
+        val mat = Matrix(3, 3, (row, col) => row * col)
+        assert(mat.swapped((0, 0), (1, 1))(0, 0) == 1)
     def testRowRange: Unit =
         val mat = Matrix(3, 3, (row, col) => row * col)
         assert(mat.rowRange(0, 2) == Vector(Vector(0, 0, 0), Vector(0, 1, 2)))
@@ -414,6 +438,8 @@ object Matrix:
         println("testWithoutRow passed")
         testWithoutCol
         println("testWithoutCol passed")
+        testSwapped
+        println("testSwapped passed")
         testRowRange
         println("testRowRange passed")
         testColRange
