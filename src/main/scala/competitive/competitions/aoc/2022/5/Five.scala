@@ -42,7 +42,7 @@ object Five extends AocProblem(2022, 5):
                     if !matrix.col(to).exists(_.empty) then
                         matrix = matrix.withRow(0, matrix.row(0).map(b => Box(' ', true)))
                     matrix = matrix.swapped(
-                        (matrix.col(to).zipWithIndex.reverse.find(_._1.empty).getOrElse((-1, -1))._2, to), 
+                        (matrix.col(to).zipWithIndex.reverse.find(_._1.empty).get._2, to), 
                         (matrix.col(from).indexWhere(!_.empty), from)
                     )
         execute(execution, instructions)
