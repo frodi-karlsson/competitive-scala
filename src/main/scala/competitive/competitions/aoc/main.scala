@@ -1,27 +1,48 @@
 package competitive.competitions.aoc
 import competitive.util.*
+import java.time.LocalDate
 
 @main
 def run =
     // change this to reflect year
-    import  competitive.competitions.aoc.y2022.*
-    val days = 
-        Vector(
-            One, Two, Three, Four, Five, 
-            Six, Seven, Eight, Nine, Ten, 
-            Eleven, Twelve, Thirteen, Fourteen, Fifteen, 
-            Sixteen, Seventeen, Eighteen, Nineteen, Twenty, 
-            TwentyOne, TwentyTwo, TwentyThree, TwentyFour, TwentyFive
+    val input =
+        Input.getInput("year-day(yy-dd) or 'td' for today's: ",
+            s => s.matches("\\d{2}-\\d{2}") || s == "td",
+            "Invalid input, please enter a year and day in the format yy-dd"
         )
-    val input = Input.getInput(
-        "Which day do you want to run?",
-        s => s.matches("\\d+") && s.toInt > 0 && s.toInt <= days.length,
-        "Invalid input, please enter a number between 1 and 25"
-        )
-    val day = input.toInt
-    days(day - 1).solve
+    var year, day = -1
+    if input == "td" then
+        val today = LocalDate.now
+        year = today.getYear - 2000
+        day = today.getDayOfMonth()
+    else
+        year = input.split("-")(0).toInt
+        day = input.split("-")(1).toInt
+    year match
+        case 22 =>
+            import competitive.competitions.aoc.y2022.*
+            Vector(
+                One, Two, Three, Four, Five, 
+                Six, Seven, Eight, Nine, Ten, 
+                Eleven, Twelve, Thirteen, Fourteen, Fifteen, 
+                Sixteen, Seventeen, Eighteen, Nineteen, Twenty, 
+                TwentyOne, TwentyTwo, TwentyThree, TwentyFour, TwentyFive
+            )
+            .apply(day - 1)
+            .solve
+        case 21 =>
+            import competitive.competitions.aoc.y2021.*
+            Vector(
+                One, Two, Three, Four, Five, 
+                Six, Seven, Eight, Nine, Ten, 
+                Eleven, Twelve, Thirteen, Fourteen, Fifteen, 
+                Sixteen, Seventeen, Eighteen, Nineteen, Twenty, 
+                TwentyOne, TwentyTwo, TwentyThree, TwentyFour, TwentyFive
+            )
+            .apply(day - 1)
+            .solve
 
-//@main // uncomment this to generate new year/days
+@main // uncomment this to generate new year/days
 def generateAoc =
     val year = 
         Input.getInput(
@@ -99,9 +120,15 @@ object $dayStr extends AocProblem($year, $day):
         for file <- Vector(testFile, sol1File, sol2File, dayFile) do
             if !file.exists then
                 file.createNewFile
+            else
+                println(s"File $file already exists for day $day in year $year")
 
         //write code to file
         val writer = new java.io.FileWriter(dayFile)
         writer.write(code)
         writer.close()
+        println(s"Created day $day in year $year")
+    
+    for day <- days do
+        generateDay(day)
 
