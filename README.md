@@ -1,0 +1,1 @@
+code for 2022: https://github.com/frodi-karlsson/competitive-scala/tree/main/src/main/scala/competitive/competitions/aoc/2022
