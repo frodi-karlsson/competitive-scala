@@ -11,13 +11,10 @@ object Eight extends AocProblem(2022, 8):
         parsed.indices.map(r =>
             parsed(r).indices.map(c=>
                 val node = parsed(r)(c)
-                val up = parsed.map(_(c)).take(r).reverse
-                val down = parsed.map(_(c)).drop(r + 1)
-                val left = parsed(r).take(c).reverse
-                val right = parsed(r).drop(c + 1)
-        
+                val (up, down) = parsed.map(_(c)).splitAt(r)
+                val (left, right) = parsed(r).splitAt(c)        
                 val isEdge = r == 0 || r == parsed.size - 1 || c == 0 || c == parsed(0).size - 1
-                isEdge || up.forall(_ < node) || down.forall(_ < node) || left.forall(_ < node) || right.forall(_ < node)   
+                isEdge || Vector(up, down.drop(1), left, right.drop(1)).exists(_.forall(_ < node)) 
             )
         ).flatten.count(identity).toString
 
@@ -26,16 +23,10 @@ object Eight extends AocProblem(2022, 8):
         parsed.indices.map(r =>
             parsed(r).indices.map(c =>
                 val node = parsed(r)(c)
-                val up = parsed.map(_(c)).take(r).reverse
-                val down = parsed.map(_(c)).drop(r + 1)
-                val left = parsed(r).take(c).reverse
-                val right = parsed(r).drop(c + 1)
-
-                val upScore = up.takeWhile(_ < node).size + (if up.exists(_ >= node) then 1 else 0)
-                val downScore = down.takeWhile(_ < node).size + (if down.exists(_ >= node) then 1 else 0)
-                val leftScore = left.takeWhile(_ < node).size + (if left.exists(_ >= node) then 1 else 0)
-                val rightScore = right.takeWhile(_ < node).size + (if right.exists(_ >= node) then 1 else 0)
-
-                upScore * downScore * leftScore * rightScore
+                val (up, down) = parsed.map(_(c)).splitAt(r)
+                val (left, right) = parsed(r).splitAt(c)
+                Seq(up.reverse, down.drop(1), left.reverse, right.drop(1)).map(dir =>
+                        dir.takeWhile(_ < node).size + (if dir.exists(_ >= node) then 1 else 0)
+                ).product
             )
         ).flatten.max.toString

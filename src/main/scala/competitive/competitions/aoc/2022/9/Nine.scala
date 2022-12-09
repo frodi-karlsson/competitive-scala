@@ -13,6 +13,7 @@ object Nine extends AocProblem(2022, 9):
         val positionsVisited = collection.mutable.Set[(Int, Int)]()
         val rope = Array.fill(ropeSize)((0, 0))
         positionsVisited.add(rope.last)
+
         parsed.foreach((dir, steps) =>
             (1 to steps).foreach(step =>
                 rope(0) = (
